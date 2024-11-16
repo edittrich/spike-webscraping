@@ -6,7 +6,7 @@ import pandas as pd
 # Parameters
 location = '61231'
 radius = '20'
-doctortype = 'H'
+doctortype = 'H' # '', F, H, P
 
 # Location
 url = 'https://arztsuchehessen.de/api/suggestPlzAndOrt'
@@ -24,7 +24,7 @@ if response.status_code == 200:
     loc = f'{data[0]['plz']} {data[0]['ort']}'  or "No Loc Found"
 else:
     print(f"Failed to retrieve location with status code: {response.status_code}")
-    exit()
+    exit(1)
 
 # Doctors
 url = 'https://arztsuchehessen.de/api/suche'
