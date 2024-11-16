@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 
 # Parameters
-location = 'Bad Nauheim'
+location = '61231'
 radius = '20'
 doctortype = 'H'
 
