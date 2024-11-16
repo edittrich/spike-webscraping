@@ -1,10 +1,8 @@
-from fileinput import fileno, filename
-
 from bs4 import BeautifulSoup
 import csv
 
-with open('data/out/Doctors.csv', 'w', newline='') as csvfile:
-    doctorwriter = csv.writer(csvfile, delimiter='|',quotechar='"', quoting=csv.QUOTE_ALL)
+with open('data/out/Doctors_static.csv', 'w', newline='') as csvfile:
+    doctorwriter = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_ALL)
     maxfiles = 7
     for i in range(1, maxfiles + 1, 1):
         with open(f"data/in/Arztsuche{i}.html", 'r', encoding='utf-8') as file:
@@ -17,8 +15,10 @@ with open('data/out/Doctors.csv', 'w', newline='') as csvfile:
                 name_element = doctor.find('h3', class_='m-react-doctors__item-header-title-headline')
                 specialization_element = doctor.find('p', class_='m-react-doctors__item-header-title-type')
                 location_element = doctor.find('div', class_='m-react-doctors__item-header-details-location')
-                phone_element = doctor.find('div', class_='m-react-doctors__item-icon-link m-react-doctors__item-icon-link--phone')
-                fax_element = doctor.find('div', class_='m-react-doctors__item-icon-link m-react-doctors__item-icon-link--fax')
+                phone_element = doctor.find('div',
+                                            class_='m-react-doctors__item-icon-link m-react-doctors__item-icon-link--phone')
+                fax_element = doctor.find('div',
+                                          class_='m-react-doctors__item-icon-link m-react-doctors__item-icon-link--fax')
 
                 details = details_element.get('href').strip() if details_element else "No Details Found"
                 distance = distance_element.text.strip() if distance_element else "No Distance Found"
