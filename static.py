@@ -12,8 +12,8 @@ with open('data/out/Doctors_static.csv', 'w', newline='') as csvfile:
             for doctor in soup.find_all('div', class_='m-react-doctors__item-wrapper'):
                 details_element = doctor.find('a', class_='m-react-doctors__item-link')
                 distance_element = doctor.find('div', class_='m-react-doctors__item-header-distance-km')
-                name_element = doctor.find('h3', class_='m-react-doctors__item-header-title-headline')
-                specialization_element = doctor.find('p', class_='m-react-doctors__item-header-title-type')
+                doctorname_element = doctor.find('h3', class_='m-react-doctors__item-header-title-headline')
+                doctortype_element = doctor.find('p', class_='m-react-doctors__item-header-title-type')
                 location_element = doctor.find('div', class_='m-react-doctors__item-header-details-location')
                 phone_element = doctor.find('div',
                                             class_='m-react-doctors__item-icon-link m-react-doctors__item-icon-link--phone')
@@ -22,8 +22,8 @@ with open('data/out/Doctors_static.csv', 'w', newline='') as csvfile:
 
                 details = details_element.get('href').strip() if details_element else "No Details Found"
                 distance = distance_element.text.strip() if distance_element else "No Distance Found"
-                name = name_element.text.strip() if name_element else "No Name Found"
-                specialization = specialization_element.text.strip() if specialization_element else "No Specialization Found"
+                doctorname = doctorname_element.text.strip() if doctorname_element else "No Name Found"
+                doctortype = doctortype_element.text.strip() if doctortype_element else "No Specialization Found"
                 locations = [p_tag.get_text() for p_tag in
                              location_element.find_all("p")] if location_element else "No Location Found"
                 phone = phone_element.text.strip() if phone_element else "No Phone Found"
@@ -31,11 +31,11 @@ with open('data/out/Doctors_static.csv', 'w', newline='') as csvfile:
 
                 print(f"Details: {details}")
                 print(f"Distance: {distance}")
-                print(f"Name: {name}")
-                print(f"Specialization: {specialization}")
+                print(f"Doctor Name: {doctorname}")
+                print(f"Doctor Type: {doctortype}")
                 print(f"Street: {locations[0]}")
                 print(f"City: {locations[1]}")
                 print(f"Phone: {phone}")
                 print(f"Fax: {fax}")
 
-                doctorwriter.writerow([details, distance, name, specialization, locations[0], locations[1], phone, fax])
+                doctorwriter.writerow([details, distance, doctorname, doctortype, locations[0], locations[1], phone, fax])
